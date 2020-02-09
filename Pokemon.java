@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.Random;
+//import java.util.Random;
 
 public class Pokemon{
     int hp_fire, hp_water, hp_grass, hp_soil ;
