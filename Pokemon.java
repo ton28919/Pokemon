@@ -1,61 +1,79 @@
-import java.io.*;
-import java.util.Scanner;
-//import java.util.Random;
 
-public class Pokemon{
-    int hp_fire, hp_water, hp_grass, hp_soil ;
-    int att_fire, att_water, att_greass, att_soil  ;
-    int element ;
-   
-    public Pokemon(){
-        hp_fire = 75 ;
-        hp_grass = 90 ;
-        hp_soil = 100 ;
-        hp_water = 80 ;
+class Pokemon{
+	public final double maxHealth;
+	protected double health,weight;
+	protected String name;
+	protected double feeling, energy;
+
+	public Pokemon(String name, double maxHealth,double weight, double feel){
+		this.name      = name;
+		this.health    = maxHealth;
+		this.maxHealth = maxHealth;
+        this.weight    = weight;
+        this.feeling   = feel;
+        this.energy    = 100;
+	}
         
-        att_fire = 120 ;
-        att_greass = 85 ;
-        att_soil = 75 ;
-        att_water = 100 ;
+    public double getWeight(){
+    	return this.weight;
     }
     
-    //Show status charecter
-    public String showStatusFire(){
-        System.out.println("MY STATUS POINT");
-        System.out.println("My element is Fire " );
-        System.out.println("My Health point "+hp_fire+"  Point");
-        System.out.println("My attack "+att_fire+"  Point");
-        
-        return "";
-    }
-    public String showStatusWater(){
-        System.out.println("MY STATUS POINT");
-        System.out.println("My element is Water");
-        System.out.println("My Health point : "+hp_water+"  Point");
-        System.out.println("My Experience ( exp ) : "+att_water+"  Point");
-        
-        return "";
-    }
-    public String showStatusGrass(){
-        System.out.println("MY STATUS POINT");
-        System.out.println("My element is Grass" );
-        System.out.println("My Health point : "+hp_grass+"  Point");
-        System.out.println("My Experience ( exp ) : "+att_greass+"  Point");
-        
-        return "";
-    }
-    public String showStatusSoil(){
-        System.out.println("MY STATUS POINT");
-        System.out.println("My element is Soil");
-        System.out.println("My Health point : "+hp_soil+"  Point");
-        System.out.println("My Experience ( exp ) : "+att_soil+"  Point");
-        
-        return "";
+    public double getEnergy(){
+    	return this.energy;
     }
     
-    public String errorElement(){
-        System.out.println("Error!!");
-        System.out.println("What your new element ?");
-        return "";
-   }
+	public double getHealth(){
+		return this.health;
+	}
+	
+	public double getMaxHealth(){
+		return this.maxHealth;
+	}
+
+	public String getName(){
+		return this.name;
+	}
+	
+	public double getFeeling(){
+		return this.feeling;
+	}
+	
+	public void eat(Berry berry){
+		this.health += berry.getRestoreValue();
+		this.weight += (0.5)*berry.getRestoreValue();
+		this.energy -= 1;
+		if(this.health > this.maxHealth)
+			this.health = this.maxHealth;
+		if(this.energy < 0)
+			this.energy = 0;
+	}
+	
+	public void exercise() {
+		this.weight -= 1;
+		this.energy -= 3;
+		this.health -= 1;
+		if(this.weight <= 1)
+			this.weight = 1;
+		if(this.energy < 0)
+			this.energy = 0;
+		if(this.health < 0)
+			this.health = 0;
+	}
+	
+	public void sleep( ) {
+		this.energy += 5;
+		if(this.energy > 100)
+			this.energy = 100;
+	}
+
+	public void goodFeeling() {
+		this.feeling += 10;
+	}
+	
+	public void badFeeling( ) {
+		this.feeling -= 5 ;
+		if(this.feeling < 0)
+			feeling = 0;
+	}
+
 }
